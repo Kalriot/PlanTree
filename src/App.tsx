@@ -7,9 +7,10 @@ import {
   Header,
   MediaQuery,
   useMantineTheme,
+  Box,
 } from '@mantine/core';
 import { useState } from 'react';
-import Flow from './Flow';
+import { Flow } from './Flow';
 
 function App() {
   const theme = useMantineTheme();
@@ -64,7 +65,9 @@ function App() {
         </Header>
       }
     >
-      <Flow></Flow>
+      <Box style={{ width: '100%', height: '100%' }}>
+        <Flow></Flow>
+      </Box>
     </AppShell>
   );
 }
