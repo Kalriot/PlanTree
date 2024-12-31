@@ -1,3 +1,4 @@
+import { Box } from '@mantine/core';
 import ReactFlow, { Controls, Background } from 'reactflow';
 import 'reactflow/dist/style.css';
 
@@ -21,12 +22,12 @@ const nodes = [
 
 function Flow() {
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <Box style={{ width: '100%', height: '100%' }}>
       <ReactFlow nodes={nodes} edges={edges}>
         <Background />
         <Controls />
       </ReactFlow>
-    </div>
+    </Box>
   );
 }
 
