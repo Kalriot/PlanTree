@@ -1,38 +1,9 @@
 import ReactFlow, { Background, Controls } from 'reactflow';
-import { SmartBezierEdge } from '@tisoap/react-flow-smart-edge';
 import 'reactflow/dist/style.css';
 
-let nodes = [
-  {
-    id: '1',
-    data: { label: 'Node 1' },
-    position: { x: 300, y: 100 },
-  },
-  {
-    id: '2',
-    data: { label: 'Node 2' },
-    position: { x: 300, y: 200 },
-  },
-];
+import { SmartBezierEdge } from '@tisoap/react-flow-smart-edge';
 
-let edges = [
-  {
-    id: 'e12',
-    source: '1',
-    target: '2',
-  },
-];
-
-nodes = nodes.map((node) => ({
-  ...node,
-  sourcePosition: 'right',
-  targetPosition: 'left',
-}));
-
-edges = edges.map((edge) => ({
-  ...edge,
-  type: 'smart',
-}));
+import { nodes, edges } from './data';
 
 const edgeTypes = {
   smart: SmartBezierEdge,
@@ -40,8 +11,15 @@ const edgeTypes = {
 
 export const Flow = () => {
   return (
-    <ReactFlow defaultNodes={nodes} defaultEdges={edges} edgeTypes={edgeTypes}>
-      <Background />
+    <ReactFlow
+      defaultNodes={nodes}
+      defaultEdges={edges}
+      edgeTypes={edgeTypes}
+      nodesDraggable={false}
+      nodesConnectable={false}
+      style={{ background: '#121212' }}
+    >
+      <Background color="#626262" />
       <Controls />
     </ReactFlow>
   );
