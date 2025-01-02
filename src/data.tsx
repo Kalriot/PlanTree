@@ -620,7 +620,7 @@ edges = edges.map((edge) => {
 
   return {
     ...edge,
-    style: { stroke: color },
+    style: { stroke: color, strokeWidth: 2 },
   };
 });
 
