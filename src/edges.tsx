@@ -371,7 +371,7 @@ initialEdges = initialEdges.map((edge) => {
 
   return {
     ...edge,
-    type: 'step',
+    type: 'smart',
     opacity: 1,
     style: { stroke: color, strokeWidth: 2 },
   };

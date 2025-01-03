@@ -10,16 +10,13 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 import '../src/customFlow.css';
 
-import {
-  SmartStraightEdge,
-  SmartStepEdge,
-} from '@tisoap/react-flow-smart-edge';
+import { SmartStraightEdge } from '@tisoap/react-flow-smart-edge';
 
 import { initialNodes } from './nodes';
 import { initialEdges } from './edges';
 
 const edgeTypes = {
-  smart: SmartStepEdge,
+  smart: SmartStraightEdge,
 };
 
 const Flow = () => {
@@ -64,7 +61,6 @@ const Flow = () => {
       onNodeClick={handleNodeClick}
       onPaneClick={handlePaneClick}
       elementsSelectable={true}
-      onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       edges={edges}
       edgeTypes={edgeTypes}
