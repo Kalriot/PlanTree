@@ -1,4 +1,4 @@
-export let edges = [
+export let initialEdges = [
   {
     id: 'INO101-INO201',
     source: 'INO101',
@@ -354,7 +354,7 @@ const colorNames = [
 let edgeColors: Record<string, string> = {};
 let colorIndex = 0;
 
-edges = edges.map((edge) => {
+initialEdges = initialEdges.map((edge) => {
   let color: string | null = null;
 
   for (const [key, value] of Object.entries(edgeColors)) {
@@ -371,8 +371,10 @@ edges = edges.map((edge) => {
 
   return {
     ...edge,
+    type: 'step',
+    opacity: 1,
     style: { stroke: color, strokeWidth: 2 },
   };
 });
 
-console.log('edges', edges);
+// console.log('edges', edges);

@@ -201,9 +201,214 @@ let firstNodes = [
     data: { label: 'INGENIERÍA DE REQUISITOS ' },
     ciclo: 5,
   },
+  {
+    id: 'c6',
+    data: { label: 'CICLO 6' },
+    ciclo: 6,
+  },
+  {
+    id: '202W0601',
+    data: { label: 'ASEGURAMIENTO DE LA CALIDAD DEL SOFTWARE' },
+    ciclo: 6,
+  },
+  {
+    id: '202W0602',
+    data: { label: 'BASE DE DATOS I' },
+    ciclo: 6,
+  },
+  {
+    id: '202W0603',
+    data: { label: 'DISEÑO DE SOFTWARE' },
+    ciclo: 6,
+  },
+  {
+    id: '202W0604',
+    data: { label: 'FORMACIÓN DE EMPRESAS DE SOFTWARE' },
+    ciclo: 6,
+  },
+  {
+    id: '202W0605',
+    data: { label: 'GESTIÓN DE LA CONFIGURACIÓN DEL SOFTWARE' },
+    ciclo: 6,
+  },
+  {
+    id: '202W0606',
+    data: { label: 'INTERACCIÓN HOMBRE COMPUTADOR' },
+    ciclo: 6,
+  },
+  {
+    id: '202W0607',
+    data: { label: 'SISTEMAS OPERATIVOS ' },
+    ciclo: 6,
+  },
+  {
+    id: 'c7',
+    data: { label: 'CICLO 7' },
+    ciclo: 7,
+  },
+  {
+    id: '202W0701',
+    data: { label: 'ARQUITECTURA DE SOFTWARE' },
+    ciclo: 7,
+  },
+  {
+    id: '202W0702',
+    data: { label: 'BASE DE DATOS II' },
+    ciclo: 7,
+  },
+  {
+    id: '202W0703',
+    data: { label: 'EXPERIENCIA DE USUARIO Y USABILIDAD' },
+    ciclo: 7,
+  },
+  {
+    id: '202W0704',
+    data: { label: 'GESTIÓN DE PROYECTO DE SOFTWARE' },
+    ciclo: 7,
+  },
+  {
+    id: '202W0705',
+    data: { label: 'INTELIGENCIA ARTIFICIAL' },
+    ciclo: 7,
+  },
+  {
+    id: '202W0706',
+    data: { label: 'MÉTODOS FORMALES PARA PRUEBAS' },
+    ciclo: 7,
+  },
+  {
+    id: '202W0707',
+    data: { label: 'REDES Y TRANSMISIÓN DE DATOS' },
+    ciclo: 7,
+  },
+  {
+    id: 'c8',
+    data: { label: 'CICLO 8' },
+    ciclo: 8,
+  },
+  {
+    id: '202W0801',
+    data: { label: 'AUTOMATIZACIÓN Y CONTROL DE SOFTWARE' },
+    ciclo: 8,
+  },
+  {
+    id: '202W0802',
+    data: { label: 'INTELIGENCIA DE NEGOCIOS' },
+    ciclo: 8,
+  },
+  {
+    id: '202W0803',
+    data: { label: 'METODOLOGÍA DE LA INVESTIGACIÓN' },
+    ciclo: 8,
+  },
+  {
+    id: '202W0804',
+    data: { label: 'MINERÍA DE DATOS' },
+    ciclo: 8,
+  },
+  {
+    id: '202W0805',
+    data: { label: 'PROGRAMACIÓN CONCURRENTE Y PARALELA' },
+    ciclo: 8,
+  },
+  {
+    id: '202W0806',
+    data: { label: 'SEGURIDAD DEL SOFTWARE' },
+    ciclo: 8,
+  },
+  {
+    id: '202W0807',
+    data: { label: 'TALLER DE CONSTRUCCIÓN DE SOFTWARE WEB' },
+    ciclo: 8,
+  },
+  {
+    id: '202W0808',
+    data: { label: 'VERIFICACIÓN Y VALIDACIÓN DE SOFTWARE' },
+    ciclo: 8,
+  },
+  {
+    id: 'c9',
+    data: { label: 'CICLO 9' },
+    ciclo: 9,
+  },
+  {
+    id: '202W0901',
+    data: { label: 'DESARROLLO DE TESIS I' },
+    ciclo: 9,
+  },
+  {
+    id: '202W0902',
+    data: { label: 'GARANTÍA DE SOFTWARE' },
+    ciclo: 9,
+  },
+  {
+    id: '202W0903',
+    data: { label: 'GERENCIA DE TECNOLOGÍA DE LA INFORMACIÓN' },
+    ciclo: 9,
+  },
+  {
+    id: '202W0904',
+    data: { label: 'GESTIÓN DE MANTENIMIENTO DEL SOFTWARE' },
+    ciclo: 9,
+  },
+  {
+    id: '202W0905',
+    data: { label: 'GESTIÓN DE RIESGO DEL SOFTWARE' },
+    ciclo: 9,
+  },
+  {
+    id: '202W0906',
+    data: { label: 'INTERNET DE LAS COSAS' },
+    ciclo: 9,
+  },
+  {
+    id: '202W0907',
+    data: { label: 'TALLER DE CONSTRUCCIÓN DE SOFTWARE MÓVIL' },
+    ciclo: 9,
+  },
+  {
+    id: '202W0908',
+    data: { label: 'SOFTWARE INTELIGENTE' },
+    ciclo: 9,
+  },
+  {
+    id: 'c10',
+    data: { label: 'CICLO 10' },
+    ciclo: 10,
+  },
+  {
+    id: '202W1001',
+    data: { label: 'ANALÍTICA DE DATOS' },
+    ciclo: 10,
+  },
+  {
+    id: '202W1002',
+    data: { label: 'DESARROLLO DE TESIS II' },
+    ciclo: 10,
+  },
+  {
+    id: '202W1003',
+    data: { label: 'PRÁCTICA PRE PROFESIONAL' },
+    ciclo: 10,
+  },
+  {
+    id: '202W1004',
+    data: { label: 'TALLER DE APLICACIONES SOCIALES' },
+    ciclo: 10,
+  },
+  {
+    id: '202W1005',
+    data: { label: 'TENDENCIAS DE ARQUITECTURA DE SOFTWARE' },
+    ciclo: 10,
+  },
+  {
+    id: '202W1006',
+    data: { label: 'TENDENCIAS EN INGENIERÍA DE SOFTWARE Y GESTIÓN' },
+    ciclo: 10,
+  },
 ];
 
-export let nodes = firstNodes.map((node) => ({
+export let initialNodes = firstNodes.map((node) => ({
   ...node,
   position: { x: 0, y: 0 },
 }));
@@ -225,14 +430,17 @@ const nodeStyle = {
 let ciclo = 1;
 let cont = 0;
 
-nodes = nodes.map((node) => {
+const horizontalSpace = 400;
+const verticalSpace = 150;
+
+initialNodes = initialNodes.map((node) => {
   if (ciclo !== node.ciclo) {
     ciclo = node.ciclo;
     cont = 0;
   }
 
-  const xPos = ciclo * 400;
-  const yPos = cont * 100;
+  const xPos = ciclo * horizontalSpace;
+  const yPos = cont * verticalSpace;
 
   cont++;
 
@@ -245,4 +453,4 @@ nodes = nodes.map((node) => {
   };
 });
 
-console.log(nodes);
+// console.log(nodes);
