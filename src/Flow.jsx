@@ -25,6 +25,32 @@ const Flow = () => {
 
   const [selectedNode, setSelectedNode] = useState(null);
 
+  const [adjListSource, setAdjListSource] = useState({}); // lista para apertura de cursos
+  const [adjListTarget, setAdjListTarget] = useState({}); // lista para pre-requisitos
+
+  useEffect(() => {
+    let newAdjListSource = {};
+    let newAdjListTarget = {};
+
+    initialEdges.forEach((edge) => {
+      if (newAdjListSource[edge.source] === undefined) {
+        newAdjListSource[edge.source] = [];
+      }
+      newAdjListSource[edge.source].push(edge.target);
+
+      if (newAdjListTarget[edge.target] === undefined) {
+        newAdjListTarget[edge.target] = [];
+      }
+      newAdjListTarget[edge.target].push(edge.source);
+    });
+
+    setAdjListSource(newAdjListSource);
+    setAdjListTarget(newAdjListTarget);
+
+    console.log('apertura', newAdjListSource);
+    console.log('pre-requisitos', newAdjListTarget);
+  }, []);
+
   useEffect(() => {
     setEdges((eds) => {
       const newEdges = eds.map((edge) => {
