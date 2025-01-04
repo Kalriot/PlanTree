@@ -372,7 +372,8 @@ initialEdges = initialEdges.map((edge) => {
   return {
     ...edge,
     type: 'smart',
-    opacity: 1,
+    // opacity: 1,
+    hidden: false,
     style: { stroke: color, strokeWidth: 2 },
   };
 });

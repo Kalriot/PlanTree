@@ -97,13 +97,13 @@ const Flow = () => {
         const newEdge = { ...edge, style: { ...edge.style } };
 
         if (selectedNode === null) {
-          newEdge.style.opacity = 1;
+          newEdge.hidden = false;
         } else if (markedEdgesTarget.includes(edge.id)) {
-          newEdge.style.opacity = 1;
+          newEdge.hidden = false;
         } else if (markedEdgesSource.includes(edge.source)) {
-          newEdge.style.opacity = 1;
+          newEdge.hidden = false;
         } else {
-          newEdge.style.opacity = 0.1;
+          newEdge.hidden = true;
         }
 
         return newEdge;
@@ -121,6 +121,8 @@ const Flow = () => {
   const handlePaneClick = useCallback(() => {
     setSelectedNode(null);
   }, []);
+
+  console.log('edges', edges);
 
   return (
     <ReactFlow
