@@ -46,22 +46,64 @@ const Flow = () => {
 
     setAdjListSource(newAdjListSource);
     setAdjListTarget(newAdjListTarget);
-
-    console.log('apertura', newAdjListSource);
-    console.log('pre-requisitos', newAdjListTarget);
   }, []);
 
+  // console.log('apertura', adjListSource);
+  // console.log('pre-requisitos', adjListTarget);
+
+  // Función BFS para recorrer el grafo
+  const bfs = (startNode) => {
+    let visited = new Set();
+    let queue = [startNode];
+    let result = [];
+
+    while (queue.length > 0) {
+      let node = queue.shift();
+      if (!visited.has(node)) {
+        visited.add(node);
+        result.push(node);
+        if (adjListSource[node]) {
+          queue.push(...adjListSource[node]);
+        }
+      }
+    }
+
+    return result;
+  };
+
   useEffect(() => {
+    let markedEdgesTarget = [];
+    let markedEdgesSource = [];
+
+    if (selectedNode) {
+      if (adjListTarget[selectedNode]) {
+        adjListTarget[selectedNode].forEach((node) => {
+          markedEdgesTarget.push(node + '-' + selectedNode);
+        });
+      }
+
+      const reachableNodes = bfs(selectedNode);
+
+      reachableNodes.forEach((node) => {
+        markedEdgesSource.push(node);
+      });
+    }
+
+    // console.log('markedEdgesTarget', markedEdgesTarget);
+    // console.log('markedEdgesSource', markedEdgesSource);
+
     setEdges((eds) => {
       const newEdges = eds.map((edge) => {
         const newEdge = { ...edge, style: { ...edge.style } };
 
         if (selectedNode === null) {
           newEdge.style.opacity = 1;
-        } else if (edge.source !== selectedNode) {
-          newEdge.style.opacity = 0.1;
-        } else {
+        } else if (markedEdgesTarget.includes(edge.id)) {
           newEdge.style.opacity = 1;
+        } else if (markedEdgesSource.includes(edge.source)) {
+          newEdge.style.opacity = 1;
+        } else {
+          newEdge.style.opacity = 0.1;
         }
 
         return newEdge;
@@ -72,6 +114,7 @@ const Flow = () => {
   }, [selectedNode, setEdges]);
 
   const handleNodeClick = useCallback((_, node) => {
+    console.log(node);
     setSelectedNode(node.id);
   }, []);
 
