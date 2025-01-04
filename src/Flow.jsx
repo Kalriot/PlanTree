@@ -122,7 +122,7 @@ const Flow = () => {
     setSelectedNode(null);
   }, []);
 
-  console.log('edges', edges);
+  // console.log('edges', edges);
 
   return (
     <ReactFlow

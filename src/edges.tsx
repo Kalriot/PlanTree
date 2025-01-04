@@ -342,6 +342,15 @@ export let initialEdges = [
 ];
 
 const colorNames = [
+  // '#448aff',
+  // '#1565c0',
+  // '#009688',
+  // '#8bc34a',
+  // '#ffc107',
+  // '#ff9800',
+  // '#f44336',
+  // '#ad1457',
+  //
   '#d51f68',
   '#f96708',
   '#fabd40',
@@ -354,7 +363,19 @@ const colorNames = [
 let edgeColors: Record<string, string> = {};
 let colorIndex = 0;
 
+// let add = true;
+// let cicloAnt = 1;
+
 initialEdges = initialEdges.map((edge) => {
+  // const cicloAct = parseInt(edge.source.slice(-3, -2));
+  // console.log(edge, ciclo);
+
+  // if (cicloAct !== cicloAnt) {
+  //   add = !add;
+  //   colorIndex = add ? 0 : colorNames.length - 1;
+  //   cicloAnt = cicloAct;
+  // }
+
   let color: string | null = null;
 
   for (const [key, value] of Object.entries(edgeColors)) {
@@ -362,17 +383,28 @@ initialEdges = initialEdges.map((edge) => {
       color = value;
     }
   }
+  // console.log('edge info', edge);
+  // console.log('color', color);
+  // console.log('add', add);
+  // console.log('colorIndex', colorIndex);
+  // console.log('colorNames index', colorNames[colorIndex]);
 
   if (!color) {
-    color = colorNames[colorIndex % colorNames.length];
+    color = colorNames[colorIndex];
     edgeColors[edge.source] = color;
+
+    if (colorIndex === colorNames.length - 1) {
+      colorIndex = 0;
+    }
     colorIndex++;
+
+    // if (add) colorIndex++;
+    // else colorIndex--;
   }
 
   return {
     ...edge,
     type: 'smart',
-    // opacity: 1,
     hidden: false,
     style: { stroke: color, strokeWidth: 2 },
   };
