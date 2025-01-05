@@ -1,70 +1,41 @@
 import {
   AppShell,
-  Text,
   Aside,
-  Burger,
   Footer,
   Header,
   MediaQuery,
-  useMantineTheme,
   Box,
 } from '@mantine/core';
-import { useState } from 'react';
+
 import Flow from './components/Flow/Flow';
 
+import CustomAside from './components/CustomAside/CustomAside';
+import CustomFooter from './components/CustomFooter/CustomFooter';
+import CustomHeader from './components/CustomHeader/CustomHeader';
+
 function App() {
-  const theme = useMantineTheme();
-  const [opened, setOpened] = useState(false);
   return (
     <AppShell
-      styles={{
-        main: {
-          background:
-            theme.colorScheme === 'dark'
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
-        },
-      }}
-      navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      // navbar={
-      //   {}
-      //   // <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-      //   //   <Text>Application navbar</Text>
-      //   // </Navbar>
-      // }
       aside={
         <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-            <Text>Application sidebar</Text>
+          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 400, lg: 500 }}>
+            <CustomAside />
           </Aside>
         </MediaQuery>
       }
       footer={
         <Footer height={60} p="md">
-          Application footer
+          <CustomFooter />
         </Footer>
       }
       header={
         <Header height={{ base: 50, md: 70 }} p="md">
-          <div
-            style={{ display: 'flex', alignItems: 'center', height: '100%' }}
-          >
-            <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-              <Burger
-                opened={opened}
-                onClick={() => setOpened((o) => !o)}
-                size="sm"
-                color={theme.colors.gray[6]}
-                mr="xl"
-              />
-            </MediaQuery>
-
-            <Text>Application header</Text>
-          </div>
+          <CustomHeader />
         </Header>
       }
     >
+      {/* // Contenido principal */}
       <Box style={{ width: '100%', height: '100%' }}>
         <Flow></Flow>
       </Box>
