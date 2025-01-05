@@ -10,7 +10,7 @@ import {
   Box,
 } from '@mantine/core';
 import { useState } from 'react';
-import Flow from './Flow';
+import Flow from './components/Flow/Flow';
 
 function App() {
   const theme = useMantineTheme();

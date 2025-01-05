@@ -8,12 +8,14 @@ import ReactFlow, {
 } from 'reactflow';
 
 import 'reactflow/dist/style.css';
-import '../src/customFlow.css';
+import './customFlow.css';
 
 import { SmartStraightEdge } from '@tisoap/react-flow-smart-edge';
 
-import { initialNodes } from './nodes';
-import { initialEdges } from './edges';
+import { initialNodes } from './data/nodes';
+import { initialEdges } from './data/edges';
+
+import { bfs } from './utils/flowUtils';
 
 const edgeTypes = {
   smart: SmartStraightEdge,
@@ -28,6 +30,7 @@ const Flow = () => {
   const [adjListSource, setAdjListSource] = useState({}); // lista para apertura de cursos
   const [adjListTarget, setAdjListTarget] = useState({}); // lista para pre-requisitos
 
+  // Creacion de adjLists
   useEffect(() => {
     let newAdjListSource = {};
     let newAdjListTarget = {};
@@ -51,26 +54,7 @@ const Flow = () => {
   // console.log('apertura', adjListSource);
   // console.log('pre-requisitos', adjListTarget);
 
-  // Función BFS para recorrer el grafo
-  const bfs = (startNode) => {
-    let visited = new Set();
-    let queue = [startNode];
-    let result = [];
-
-    while (queue.length > 0) {
-      let node = queue.shift();
-      if (!visited.has(node)) {
-        visited.add(node);
-        result.push(node);
-        if (adjListSource[node]) {
-          queue.push(...adjListSource[node]);
-        }
-      }
-    }
-
-    return result;
-  };
-
+  // Marcado de edges
   useEffect(() => {
     let markedEdgesTarget = [];
     let markedEdgesSource = [];
@@ -82,7 +66,7 @@ const Flow = () => {
         });
       }
 
-      const reachableNodes = bfs(selectedNode);
+      const reachableNodes = bfs(selectedNode, adjListSource);
 
       reachableNodes.forEach((node) => {
         markedEdgesSource.push(node);
