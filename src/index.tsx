@@ -13,7 +13,10 @@ root.render(
     <MantineProvider
       withGlobalStyles
       withNormalizeCSS
-      theme={{ colorScheme: 'dark' }}
+      theme={{
+        fontFamily: 'Poppins, system-ui, Avenir, Helvetica, Arial, sans-serif',
+        colorScheme: 'dark',
+      }}
     >
       <App />
     </MantineProvider>
