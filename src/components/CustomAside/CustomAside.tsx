@@ -1,5 +1,5 @@
-import { Text } from '@mantine/core';
+import { Title } from '@mantine/core';
 
-export default function CustomAside() {
-  return <Text>Lado derecho (Standalone)</Text>;
+export default function Aside() {
+  return <Title order={3}>Detalles</Title>;
 }
