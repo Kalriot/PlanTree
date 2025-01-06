@@ -114,14 +114,16 @@ const Flow = () => {
       nodesDraggable={false}
       nodesConnectable={false}
       onNodeClick={handleNodeClick}
-      onPaneClick={handlePaneClick}
-      elementsSelectable={true}
-      onEdgesChange={onEdgesChange}
+      //
       edges={edges}
       edgeTypes={edgeTypes}
+      onEdgesChange={onEdgesChange}
+      //
+      elementsSelectable={true}
+      onPaneClick={handlePaneClick}
+      style={{ background: '#121212' }}
       fitView
       minZoom={0}
-      style={{ background: '#121212' }}
     >
       <Background color="#626262" />
       <Controls showInteractive={false} />

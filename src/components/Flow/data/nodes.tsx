@@ -413,20 +413,6 @@ export let initialNodes = firstNodes.map((node) => ({
   position: { x: 0, y: 0 },
 }));
 
-const nodeStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  color: 'white',
-
-  background: '#1e1e1e',
-  border: '2px solid #555',
-  borderRadius: 10,
-
-  width: 200,
-  height: 60,
-};
-
 let ciclo = 1;
 let cont = 0;
 
@@ -449,7 +435,7 @@ initialNodes = initialNodes.map((node) => {
     sourcePosition: 'right',
     targetPosition: 'left',
     position: { x: xPos, y: yPos },
-    style: { ...nodeStyle },
+    className: 'node-base node-standard',
   };
 });
 
