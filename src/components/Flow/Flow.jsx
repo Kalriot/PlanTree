@@ -27,8 +27,8 @@ const Flow = () => {
 
   const [selectedNode, setSelectedNode] = useState(null);
 
-  const [adjListSource, setAdjListSource] = useState({}); // lista para apertura de cursos
-  const [adjListTarget, setAdjListTarget] = useState({}); // lista para pre-requisitos
+  const [adjListSource, setAdjListSource] = useState({}); // Lista para apertura de cursos
+  const [adjListTarget, setAdjListTarget] = useState({}); // Lista para pre-requisitos
 
   // Creacion de adjLists
   useEffect(() => {
