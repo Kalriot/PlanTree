@@ -1,6 +1,4 @@
 import { create } from 'zustand';
-import { initialNodes } from '../components/Flow/data/nodes';
-import { initialEdges } from '../components/Flow/data/edges';
 
 import {
   applyEdgeChanges,
@@ -10,6 +8,11 @@ import {
   OnEdgesChange,
   OnNodesChange,
 } from 'reactflow';
+
+import { initialNodes } from '../components/Flow/data/nodes';
+import { initialEdges } from '../components/Flow/data/edges';
+
+import { bfs } from '../utils/flowUtils';
 
 interface GlobalStore {
   nodes: any[];
@@ -31,6 +34,8 @@ interface GlobalStore {
   setAdjListTarget: (adjListTarget: { [key: string]: string[] }) => void;
 
   createAdjLists: () => void;
+
+  markEdges: () => void;
 }
 
 export const useGlobalStore = create<GlobalStore>()((set, get) => ({
@@ -95,6 +100,47 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
     set({
       adjListSource: newAdjListSource,
       adjListTarget: newAdjListTarget,
+    });
+  },
+
+  markEdges: () => {
+    const { selectedNode, adjListSource, adjListTarget, updateEdges } = get();
+
+    let markedEdgesTarget: string[] = [];
+    let markedEdgesSource: string[] = [];
+
+    if (selectedNode) {
+      if (adjListTarget[selectedNode]) {
+        adjListTarget[selectedNode].forEach((node) => {
+          markedEdgesTarget.push(node + '-' + selectedNode);
+        });
+      }
+
+      const reachableNodes = bfs(selectedNode, adjListSource);
+
+      reachableNodes.forEach((node) => {
+        markedEdgesSource.push(node);
+      });
+    }
+
+    updateEdges((eds) => {
+      const newEdges = eds.map((edge) => {
+        const newEdge = { ...edge, style: { ...edge.style } };
+
+        if (selectedNode === null) {
+          newEdge.hidden = false;
+        } else if (markedEdgesTarget.includes(edge.id)) {
+          newEdge.hidden = false;
+        } else if (markedEdgesSource.includes(edge.source)) {
+          newEdge.hidden = false;
+        } else {
+          newEdge.hidden = true;
+        }
+
+        return newEdge;
+      });
+
+      return newEdges;
     });
   },
 }));

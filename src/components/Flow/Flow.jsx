@@ -15,7 +15,7 @@ import { SmartStraightEdge } from '@tisoap/react-flow-smart-edge';
 // import { initialNodes } from './data/nodes';
 // import { initialEdges } from './data/edges';
 
-import { bfs } from './utils/flowUtils';
+import { bfs } from '../../utils/flowUtils';
 
 import { useGlobalStore } from '../../store/useGlobalStore';
 import { useShallow } from 'zustand/react/shallow';
@@ -39,91 +39,74 @@ const Flow = () => {
   const {
     selectedNode,
     setSelectedNode,
-    updateEdges,
+    // updateEdges,
     createAdjLists,
-    adjListSource,
-    adjListTarget,
+    // adjListSource,
+    // adjListTarget,
+    markEdges,
   } = useGlobalStore((state) => ({
     selectedNode: state.selectedNode,
     setSelectedNode: state.setSelectedNode,
 
-    updateEdges: state.updateEdges,
+    // updateEdges: state.updateEdges,
 
     createAdjLists: state.createAdjLists,
-    adjListSource: state.adjListSource, // Lista para apertura de cursos
-    adjListTarget: state.adjListTarget, // Lista para pre-requisitos
+    // adjListSource: state.adjListSource, // Lista para apertura de cursos
+    // adjListTarget: state.adjListTarget, // Lista para pre-requisitos
+    markEdges: state.markEdges,
   }));
-
-  // const [, setAdjListSource] = useState({});
-  // const [, setAdjListTarget] = useState({});
 
   // Creacion de adjLists
   useEffect(() => {
-    // let newAdjListSource = {};
-    // let newAdjListTarget = {};
-
-    // edges.forEach((edge) => {
-    //   if (newAdjListSource[edge.source] === undefined) {
-    //     newAdjListSource[edge.source] = [];
-    //   }
-    //   newAdjListSource[edge.source].push(edge.target);
-
-    //   if (newAdjListTarget[edge.target] === undefined) {
-    //     newAdjListTarget[edge.target] = [];
-    //   }
-    //   newAdjListTarget[edge.target].push(edge.source);
-    // });
-
-    // setAdjListSource(newAdjListSource);
-    // setAdjListTarget(newAdjListTarget);
     createAdjLists();
   }, []);
 
   // Marcado de edges
   useEffect(() => {
-    let markedEdgesTarget = [];
-    let markedEdgesSource = [];
+    // let markedEdgesTarget = [];
+    // let markedEdgesSource = [];
 
-    // console.log('selectedNode', selectedNode);
+    // // console.log('selectedNode', selectedNode);
 
-    if (selectedNode) {
-      if (adjListTarget[selectedNode]) {
-        adjListTarget[selectedNode].forEach((node) => {
-          markedEdgesTarget.push(node + '-' + selectedNode);
-        });
-      }
+    // if (selectedNode) {
+    //   if (adjListTarget[selectedNode]) {
+    //     adjListTarget[selectedNode].forEach((node) => {
+    //       markedEdgesTarget.push(node + '-' + selectedNode);
+    //     });
+    //   }
 
-      const reachableNodes = bfs(selectedNode, adjListSource);
+    //   const reachableNodes = bfs(selectedNode, adjListSource);
 
-      reachableNodes.forEach((node) => {
-        markedEdgesSource.push(node);
-      });
-    }
+    //   reachableNodes.forEach((node) => {
+    //     markedEdgesSource.push(node);
+    //   });
+    // }
 
-    // console.log('markedEdgesTarget', markedEdgesTarget);
-    // console.log('markedEdgesSource', markedEdgesSource);
+    // // console.log('markedEdgesTarget', markedEdgesTarget);
+    // // console.log('markedEdgesSource', markedEdgesSource);
 
-    updateEdges((eds) => {
-      // console.log('hola');
-      const newEdges = eds.map((edge) => {
-        const newEdge = { ...edge, style: { ...edge.style } };
+    // updateEdges((eds) => {
+    //   // console.log('hola');
+    //   const newEdges = eds.map((edge) => {
+    //     const newEdge = { ...edge, style: { ...edge.style } };
 
-        if (selectedNode === null) {
-          newEdge.hidden = false;
-        } else if (markedEdgesTarget.includes(edge.id)) {
-          newEdge.hidden = false;
-        } else if (markedEdgesSource.includes(edge.source)) {
-          newEdge.hidden = false;
-        } else {
-          newEdge.hidden = true;
-        }
+    //     if (selectedNode === null) {
+    //       newEdge.hidden = false;
+    //     } else if (markedEdgesTarget.includes(edge.id)) {
+    //       newEdge.hidden = false;
+    //     } else if (markedEdgesSource.includes(edge.source)) {
+    //       newEdge.hidden = false;
+    //     } else {
+    //       newEdge.hidden = true;
+    //     }
 
-        return newEdge;
-      });
+    //     return newEdge;
+    //   });
 
-      return newEdges;
-    });
-  }, [selectedNode, updateEdges]);
+    //   return newEdges;
+    // });
+    markEdges();
+  }, [selectedNode]);
 
   const handleNodeClick = useCallback((_, node) => {
     console.log(node);
