@@ -32,43 +32,51 @@ const edgeTypes = {
 };
 
 const Flow = () => {
-  // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  // const [selectedNode, setSelectedNode] = useState(null);
-
-  // const [, ,] = useEdgesState(initialEdges);
-
-  const setGlobalNodes = useGlobalStore((state) => state.setNodes);
-
-  const selectedNode = useGlobalStore((state) => state.selectedNode);
-  const setSelectedNode = useGlobalStore((state) => state.setSelectedNode);
-  const updateEdges = useGlobalStore((state) => state.updateEdges);
-
   const { nodes, onNodesChange, edges, onEdgesChange } = useGlobalStore(
     useShallow(selector)
   );
 
-  const [adjListSource, setAdjListSource] = useState({}); // Lista para apertura de cursos
-  const [adjListTarget, setAdjListTarget] = useState({}); // Lista para pre-requisitos
+  const {
+    selectedNode,
+    setSelectedNode,
+    updateEdges,
+    createAdjLists,
+    adjListSource,
+    adjListTarget,
+  } = useGlobalStore((state) => ({
+    selectedNode: state.selectedNode,
+    setSelectedNode: state.setSelectedNode,
+
+    updateEdges: state.updateEdges,
+
+    createAdjLists: state.createAdjLists,
+    adjListSource: state.adjListSource, // Lista para apertura de cursos
+    adjListTarget: state.adjListTarget, // Lista para pre-requisitos
+  }));
+
+  // const [, setAdjListSource] = useState({});
+  // const [, setAdjListTarget] = useState({});
 
   // Creacion de adjLists
   useEffect(() => {
-    let newAdjListSource = {};
-    let newAdjListTarget = {};
+    // let newAdjListSource = {};
+    // let newAdjListTarget = {};
 
-    edges.forEach((edge) => {
-      if (newAdjListSource[edge.source] === undefined) {
-        newAdjListSource[edge.source] = [];
-      }
-      newAdjListSource[edge.source].push(edge.target);
+    // edges.forEach((edge) => {
+    //   if (newAdjListSource[edge.source] === undefined) {
+    //     newAdjListSource[edge.source] = [];
+    //   }
+    //   newAdjListSource[edge.source].push(edge.target);
 
-      if (newAdjListTarget[edge.target] === undefined) {
-        newAdjListTarget[edge.target] = [];
-      }
-      newAdjListTarget[edge.target].push(edge.source);
-    });
+    //   if (newAdjListTarget[edge.target] === undefined) {
+    //     newAdjListTarget[edge.target] = [];
+    //   }
+    //   newAdjListTarget[edge.target].push(edge.source);
+    // });
 
-    setAdjListSource(newAdjListSource);
-    setAdjListTarget(newAdjListTarget);
+    // setAdjListSource(newAdjListSource);
+    // setAdjListTarget(newAdjListTarget);
+    createAdjLists();
   }, []);
 
   // Marcado de edges
@@ -76,7 +84,7 @@ const Flow = () => {
     let markedEdgesTarget = [];
     let markedEdgesSource = [];
 
-    console.log('selectedNode', selectedNode);
+    // console.log('selectedNode', selectedNode);
 
     if (selectedNode) {
       if (adjListTarget[selectedNode]) {
@@ -92,11 +100,11 @@ const Flow = () => {
       });
     }
 
-    console.log('markedEdgesTarget', markedEdgesTarget);
-    console.log('markedEdgesSource', markedEdgesSource);
+    // console.log('markedEdgesTarget', markedEdgesTarget);
+    // console.log('markedEdgesSource', markedEdgesSource);
 
     updateEdges((eds) => {
-      console.log('hola');
+      // console.log('hola');
       const newEdges = eds.map((edge) => {
         const newEdge = { ...edge, style: { ...edge.style } };
 
@@ -116,11 +124,6 @@ const Flow = () => {
       return newEdges;
     });
   }, [selectedNode, updateEdges]);
-
-  // Actualizar el global store con los nodos actualizados
-  useEffect(() => {
-    setGlobalNodes(nodes);
-  }, [nodes, setGlobalNodes]);
 
   const handleNodeClick = useCallback((_, node) => {
     console.log(node);

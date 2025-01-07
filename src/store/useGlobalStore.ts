@@ -18,14 +18,19 @@ interface GlobalStore {
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
 
-  updateEdges: (updateFn: (edges: any[]) => any[]) => void;
-
   selectedNode: any;
   setSelectedNode: (nodeId: any) => void;
-  getNodeData: () => any;
 
-  setNodes: (nodes: any[]) => void;
-  setEdges: (edges: any[]) => void;
+  getNodeData: () => any;
+  updateEdges: (updateFn: (edges: any[]) => any[]) => void;
+
+  adjListSource: { [key: string]: string[] };
+  adjListTarget: { [key: string]: string[] };
+
+  setAdjListSource: (adjListSource: { [key: string]: string[] }) => void;
+  setAdjListTarget: (adjListTarget: { [key: string]: string[] }) => void;
+
+  createAdjLists: () => void;
 }
 
 export const useGlobalStore = create<GlobalStore>()((set, get) => ({
@@ -43,20 +48,53 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
     });
   },
 
-  updateEdges: (updateFn: (edges: any[]) => any[]) => {
-    set((state) => ({
-      edges: updateFn(state.edges),
-    }));
-  },
-
   selectedNode: null,
   setSelectedNode: (nodeId: any) => set({ selectedNode: nodeId }),
+
   getNodeData: () => {
     const nodes = get().nodes;
     const selectedNode = get().selectedNode;
     return nodes.find((node) => node.id === selectedNode);
   },
 
-  setNodes: (nodes: any[]) => set({ nodes }),
-  setEdges: (edges: any[]) => set({ edges }),
+  updateEdges: (updateFn: (edges: any[]) => any[]) => {
+    set((state) => ({
+      edges: updateFn(state.edges),
+    }));
+  },
+
+  adjListSource: {},
+  adjListTarget: {},
+
+  setAdjListSource: (adjListSource: any) => set({ adjListSource }),
+  setAdjListTarget: (adjListTarget: any) => set({ adjListTarget }),
+
+  createAdjLists: () => {
+    const edges = get().edges;
+
+    console.log('edges', edges);
+
+    let newAdjListSource: { [key: string]: string[] } = {};
+    let newAdjListTarget: { [key: string]: string[] } = {};
+
+    edges.forEach((edge) => {
+      if (newAdjListSource[edge.source] === undefined) {
+        newAdjListSource[edge.source] = [];
+      }
+      newAdjListSource[edge.source].push(edge.target);
+
+      if (newAdjListTarget[edge.target] === undefined) {
+        newAdjListTarget[edge.target] = [];
+      }
+      newAdjListTarget[edge.target].push(edge.source);
+    });
+
+    console.log('newAdjListSource', newAdjListSource);
+    console.log('newAdjListTarget', newAdjListTarget);
+
+    set({
+      adjListSource: newAdjListSource,
+      adjListTarget: newAdjListTarget,
+    });
+  },
 }));
