@@ -13,7 +13,7 @@ import './customFlow.css';
 import { SmartStraightEdge } from '@tisoap/react-flow-smart-edge';
 
 // import { initialNodes } from './data/nodes';
-import { initialEdges } from './data/edges';
+// import { initialEdges } from './data/edges';
 
 import { bfs } from './utils/flowUtils';
 
@@ -22,7 +22,9 @@ import { useShallow } from 'zustand/react/shallow';
 
 const selector = (state) => ({
   nodes: state.nodes,
+  edges: state.edges,
   onNodesChange: state.onNodesChange,
+  onEdgesChange: state.onEdgesChange,
 });
 
 const edgeTypes = {
@@ -32,15 +34,18 @@ const edgeTypes = {
 const Flow = () => {
   // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   // const [selectedNode, setSelectedNode] = useState(null);
-  
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  // const [, ,] = useEdgesState(initialEdges);
 
   const setGlobalNodes = useGlobalStore((state) => state.setNodes);
 
   const selectedNode = useGlobalStore((state) => state.selectedNode);
   const setSelectedNode = useGlobalStore((state) => state.setSelectedNode);
+  const updateEdges = useGlobalStore((state) => state.updateEdges);
 
-  const { nodes, onNodesChange } = useGlobalStore(useShallow(selector));
+  const { nodes, onNodesChange, edges, onEdgesChange } = useGlobalStore(
+    useShallow(selector)
+  );
 
   const [adjListSource, setAdjListSource] = useState({}); // Lista para apertura de cursos
   const [adjListTarget, setAdjListTarget] = useState({}); // Lista para pre-requisitos
@@ -50,7 +55,7 @@ const Flow = () => {
     let newAdjListSource = {};
     let newAdjListTarget = {};
 
-    initialEdges.forEach((edge) => {
+    edges.forEach((edge) => {
       if (newAdjListSource[edge.source] === undefined) {
         newAdjListSource[edge.source] = [];
       }
@@ -71,6 +76,8 @@ const Flow = () => {
     let markedEdgesTarget = [];
     let markedEdgesSource = [];
 
+    console.log('selectedNode', selectedNode);
+
     if (selectedNode) {
       if (adjListTarget[selectedNode]) {
         adjListTarget[selectedNode].forEach((node) => {
@@ -85,7 +92,11 @@ const Flow = () => {
       });
     }
 
-    setEdges((eds) => {
+    console.log('markedEdgesTarget', markedEdgesTarget);
+    console.log('markedEdgesSource', markedEdgesSource);
+
+    updateEdges((eds) => {
+      console.log('hola');
       const newEdges = eds.map((edge) => {
         const newEdge = { ...edge, style: { ...edge.style } };
 
@@ -104,7 +115,7 @@ const Flow = () => {
 
       return newEdges;
     });
-  }, [selectedNode, setEdges]);
+  }, [selectedNode, updateEdges]);
 
   // Actualizar el global store con los nodos actualizados
   useEffect(() => {
