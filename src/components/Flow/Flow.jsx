@@ -12,18 +12,27 @@ import './customFlow.css';
 
 import { SmartStraightEdge } from '@tisoap/react-flow-smart-edge';
 
-import { initialNodes } from './data/nodes';
+// import { initialNodes } from './data/nodes';
 import { initialEdges } from './data/edges';
 
 import { bfs } from './utils/flowUtils';
+
 import { useGlobalStore } from '../../store/useGlobalStore';
+import { useShallow } from 'zustand/react/shallow';
+
+const selector = (state) => ({
+  nodes: state.nodes,
+  onNodesChange: state.onNodesChange,
+});
 
 const edgeTypes = {
   smart: SmartStraightEdge,
 };
 
 const Flow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  // const [selectedNode, setSelectedNode] = useState(null);
+  
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const setGlobalNodes = useGlobalStore((state) => state.setNodes);
@@ -31,7 +40,7 @@ const Flow = () => {
   const selectedNode = useGlobalStore((state) => state.selectedNode);
   const setSelectedNode = useGlobalStore((state) => state.setSelectedNode);
 
-  // const [selectedNode, setSelectedNode] = useState(null);
+  const { nodes, onNodesChange } = useGlobalStore(useShallow(selector));
 
   const [adjListSource, setAdjListSource] = useState({}); // Lista para apertura de cursos
   const [adjListTarget, setAdjListTarget] = useState({}); // Lista para pre-requisitos
