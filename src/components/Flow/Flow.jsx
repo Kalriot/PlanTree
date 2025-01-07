@@ -16,6 +16,7 @@ import { initialNodes } from './data/nodes';
 import { initialEdges } from './data/edges';
 
 import { bfs } from './utils/flowUtils';
+import { useGlobalStore } from '../../store/useGlobalStore';
 
 const edgeTypes = {
   smart: SmartStraightEdge,
@@ -25,7 +26,12 @@ const Flow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const [selectedNode, setSelectedNode] = useState(null);
+  const setGlobalNodes = useGlobalStore((state) => state.setNodes);
+
+  const selectedNode = useGlobalStore((state) => state.selectedNode);
+  const setSelectedNode = useGlobalStore((state) => state.setSelectedNode);
+
+  // const [selectedNode, setSelectedNode] = useState(null);
 
   const [adjListSource, setAdjListSource] = useState({}); // Lista para apertura de cursos
   const [adjListTarget, setAdjListTarget] = useState({}); // Lista para pre-requisitos
@@ -51,9 +57,6 @@ const Flow = () => {
     setAdjListTarget(newAdjListTarget);
   }, []);
 
-  // console.log('apertura', adjListSource);
-  // console.log('pre-requisitos', adjListTarget);
-
   // Marcado de edges
   useEffect(() => {
     let markedEdgesTarget = [];
@@ -72,9 +75,6 @@ const Flow = () => {
         markedEdgesSource.push(node);
       });
     }
-
-    // console.log('markedEdgesTarget', markedEdgesTarget);
-    // console.log('markedEdgesSource', markedEdgesSource);
 
     setEdges((eds) => {
       const newEdges = eds.map((edge) => {
@@ -96,6 +96,11 @@ const Flow = () => {
       return newEdges;
     });
   }, [selectedNode, setEdges]);
+
+  // Actualizar el global store con los nodos actualizados
+  useEffect(() => {
+    setGlobalNodes(nodes);
+  }, [nodes, setGlobalNodes]);
 
   const handleNodeClick = useCallback((_, node) => {
     console.log(node);
