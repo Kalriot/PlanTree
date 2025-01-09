@@ -360,7 +360,7 @@ const colorNames = [
   '#ba29e0',
 ];
 
-let edgeColors: Record<string, string> = {};
+const edgeColors: Record<string, string> = {};
 let colorIndex = 0;
 
 // let add = true;

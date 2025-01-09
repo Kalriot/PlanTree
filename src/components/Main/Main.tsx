@@ -8,6 +8,7 @@ import {
 } from '@mantine/core';
 
 import Flow from '../Flow/Flow';
+import React from 'react';
 
 import CustomAside from '../CustomAside/CustomAside';
 import CustomFooter from '../CustomFooter/CustomFooter';

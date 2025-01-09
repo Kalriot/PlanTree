@@ -22,9 +22,7 @@ const edgeTypes = {
 };
 
 const Flow = () => {
-  const { nodes, onNodesChange, edges, onEdgesChange } = useGlobalStore(
-    useShallow(selector)
-  );
+  const { nodes, edges, onEdgesChange } = useGlobalStore(useShallow(selector));
 
   const { selectedNode, setSelectedNode, createAdjLists, markEdges } =
     useGlobalStore((state) => ({

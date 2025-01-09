@@ -1,4 +1,5 @@
 import { Poppins } from 'next/font/google';
+import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="poppins.classname">
+    <html lang="en" className={poppins.className}>
       <body>{children}</body>
     </html>
   );

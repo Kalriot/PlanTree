@@ -79,8 +79,8 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
 
     // console.log('edges', edges);
 
-    let newAdjListSource: { [key: string]: string[] } = {};
-    let newAdjListTarget: { [key: string]: string[] } = {};
+    const newAdjListSource: { [key: string]: string[] } = {};
+    const newAdjListTarget: { [key: string]: string[] } = {};
 
     edges.forEach((edge) => {
       if (newAdjListSource[edge.source] === undefined) {
@@ -106,8 +106,8 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
   markEdges: () => {
     const { selectedNode, adjListSource, adjListTarget, updateEdges } = get();
 
-    let markedEdgesTarget: string[] = [];
-    let markedEdgesSource: string[] = [];
+    const markedEdgesTarget: string[] = [];
+    const markedEdgesSource: string[] = [];
 
     if (selectedNode) {
       if (adjListTarget[selectedNode]) {

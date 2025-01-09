@@ -1,4 +1,4 @@
-let firstNodes = [
+const firstNodes = [
   {
     id: 'c1',
     data: { label: 'CICLO 1' },
