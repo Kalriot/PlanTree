@@ -1,14 +1,14 @@
 import { Stack, Title, Text } from '@mantine/core';
-import { useGlobalStore } from '../../store/useGlobalStore';
+// import { useGlobalStore } from '../../store/useGlobalStore';
 
 export default function Aside() {
-  const selectedNodeData = useGlobalStore((state) => state.getNodeData());
+  // const selectedNodeData = useGlobalStore((state) => state.getNodeData());
 
   return (
     <Stack>
       <Title order={3}>Detalles</Title>
 
-      {selectedNodeData ? (
+      {/* {selectedNodeData ? (
         <Stack>
           <Text>
             <strong>Nombre:</strong> {selectedNodeData.data.label}
@@ -25,7 +25,7 @@ export default function Aside() {
         </Stack>
       ) : (
         <Text>No hay nodo seleccionado</Text>
-      )}
+      )} */}
     </Stack>
   );
 }

@@ -7,13 +7,13 @@ import {
   Box,
 } from '@mantine/core';
 
-import Flow from './components/Flow/Flow';
+import Flow from '../Flow/Flow';
 
-import CustomAside from './components/CustomAside/CustomAside';
-import CustomFooter from './components/CustomFooter/CustomFooter';
-import CustomHeader from './components/CustomHeader/CustomHeader';
+import CustomAside from '../CustomAside/CustomAside';
+import CustomFooter from '../CustomFooter/CustomFooter';
+import CustomHeader from '../CustomHeader/CustomHeader';
 
-function App() {
+function Main() {
   return (
     <AppShell
       asideOffsetBreakpoint="sm"
@@ -43,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;

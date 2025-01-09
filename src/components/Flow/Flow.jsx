@@ -1,21 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
-import ReactFlow, {
-  Background,
-  Controls,
-  useNodesState,
-  useEdgesState,
-} from 'reactflow';
+import ReactFlow, { Background, Controls } from 'reactflow';
 
 import 'reactflow/dist/style.css';
 import './customFlow.css';
 
 import { SmartStraightEdge } from '@tisoap/react-flow-smart-edge';
-
-// import { initialNodes } from './data/nodes';
-// import { initialEdges } from './data/edges';
-
-import { bfs } from '../../utils/flowUtils';
 
 import { useGlobalStore } from '../../store/useGlobalStore';
 import { useShallow } from 'zustand/react/shallow';
@@ -36,75 +26,28 @@ const Flow = () => {
     useShallow(selector)
   );
 
-  const {
-    selectedNode,
-    setSelectedNode,
-    // updateEdges,
-    createAdjLists,
-    // adjListSource,
-    // adjListTarget,
-    markEdges,
-  } = useGlobalStore((state) => ({
-    selectedNode: state.selectedNode,
-    setSelectedNode: state.setSelectedNode,
+  const { selectedNode, setSelectedNode, createAdjLists, markEdges } =
+    useGlobalStore((state) => ({
+      selectedNode: state.selectedNode,
+      setSelectedNode: state.setSelectedNode,
 
-    // updateEdges: state.updateEdges,
-
-    createAdjLists: state.createAdjLists,
-    // adjListSource: state.adjListSource, // Lista para apertura de cursos
-    // adjListTarget: state.adjListTarget, // Lista para pre-requisitos
-    markEdges: state.markEdges,
-  }));
+      createAdjLists: state.createAdjLists,
+      markEdges: state.markEdges,
+    }));
 
   // Creacion de adjLists
   useEffect(() => {
     createAdjLists();
   }, []);
 
+  // useEffect(() => {
+  //   fetch('/api/test')
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // }, []);
+
   // Marcado de edges
   useEffect(() => {
-    // let markedEdgesTarget = [];
-    // let markedEdgesSource = [];
-
-    // // console.log('selectedNode', selectedNode);
-
-    // if (selectedNode) {
-    //   if (adjListTarget[selectedNode]) {
-    //     adjListTarget[selectedNode].forEach((node) => {
-    //       markedEdgesTarget.push(node + '-' + selectedNode);
-    //     });
-    //   }
-
-    //   const reachableNodes = bfs(selectedNode, adjListSource);
-
-    //   reachableNodes.forEach((node) => {
-    //     markedEdgesSource.push(node);
-    //   });
-    // }
-
-    // // console.log('markedEdgesTarget', markedEdgesTarget);
-    // // console.log('markedEdgesSource', markedEdgesSource);
-
-    // updateEdges((eds) => {
-    //   // console.log('hola');
-    //   const newEdges = eds.map((edge) => {
-    //     const newEdge = { ...edge, style: { ...edge.style } };
-
-    //     if (selectedNode === null) {
-    //       newEdge.hidden = false;
-    //     } else if (markedEdgesTarget.includes(edge.id)) {
-    //       newEdge.hidden = false;
-    //     } else if (markedEdgesSource.includes(edge.source)) {
-    //       newEdge.hidden = false;
-    //     } else {
-    //       newEdge.hidden = true;
-    //     }
-
-    //     return newEdge;
-    //   });
-
-    //   return newEdges;
-    // });
     markEdges();
   }, [selectedNode]);
 

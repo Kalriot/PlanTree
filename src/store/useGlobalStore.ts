@@ -77,7 +77,7 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
   createAdjLists: () => {
     const edges = get().edges;
 
-    console.log('edges', edges);
+    // console.log('edges', edges);
 
     let newAdjListSource: { [key: string]: string[] } = {};
     let newAdjListTarget: { [key: string]: string[] } = {};
@@ -94,8 +94,8 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
       newAdjListTarget[edge.target].push(edge.source);
     });
 
-    console.log('newAdjListSource', newAdjListSource);
-    console.log('newAdjListTarget', newAdjListTarget);
+    // console.log('newAdjListSource', newAdjListSource);
+    // console.log('newAdjListTarget', newAdjListTarget);
 
     set({
       adjListSource: newAdjListSource,
