@@ -38,11 +38,11 @@ const Flow = () => {
     createAdjLists();
   }, []);
 
-  // useEffect(() => {
-  //   fetch('/api/test')
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data));
-  // }, []);
+  useEffect(() => {
+    fetch('/api/hello')
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
 
   // Marcado de edges
   useEffect(() => {

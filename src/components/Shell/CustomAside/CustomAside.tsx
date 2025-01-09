@@ -1,5 +1,6 @@
-import { Stack, Title, Text } from '@mantine/core';
+import { Stack, Title, Text, ScrollArea } from '@mantine/core';
 import { useGlobalStore } from '../../../store/useGlobalStore';
+import FetchAsignaturas from '../Test/FetchExample';
 
 export default function Aside() {
   const selectedNodeData = useGlobalStore((state) => state.getNodeData());
@@ -26,6 +27,13 @@ export default function Aside() {
       ) : (
         <Text>No hay nodo seleccionado</Text>
       )}
+
+      <Title mt="md" order={3}>
+        Plan de Estudios
+      </Title>
+      <ScrollArea h={300}>
+        <FetchAsignaturas />
+      </ScrollArea>
     </Stack>
   );
 }

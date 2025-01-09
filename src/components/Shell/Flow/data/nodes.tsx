@@ -3,13 +3,11 @@ const firstNodes = [
     id: 'c1',
     data: { label: 'CICLO 1' },
     ciclo: 1,
-    position: { x: 0, y: 0 },
   },
   {
     id: 'INO101',
     data: { label: 'REDACCIÓN Y TÉCNICAS DE COMUNICACIÓN EFECTIVA I' },
     ciclo: 1,
-    position: { x: 0, y: 0 },
   },
   {
     id: 'INO102',

@@ -38,7 +38,7 @@ function Shell() {
     >
       {/* // Contenido principal */}
       <Box style={{ width: '100%', height: '100%' }}>
-        <Flow></Flow>
+        <Flow />
       </Box>
     </AppShell>
   );
