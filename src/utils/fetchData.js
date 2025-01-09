@@ -19,10 +19,16 @@ export const fetchData = async (user, pass) => {
       throw new Error(result.error || 'Error desconocido');
     }
 
+    console.log('Data fetched', result);
+
     const { nodes, edges } = transformData(result.data);
 
     setNodes(nodes);
     setEdges(edges);
+
+    console.log('Data transformed and set');
+    console.log('Nodes:', nodes);
+    console.log('Edges:', edges);
 
     return { success: true, data: result };
   } catch (error) {
