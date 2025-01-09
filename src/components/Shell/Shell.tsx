@@ -12,7 +12,7 @@ import React from 'react';
 
 import CustomAside from './CustomAside/CustomAside';
 import CustomFooter from './CustomFooter/CustomFooter';
-import CustomHeader from './CustomHeader/CustomHeader';
+import CustomHeader from './CustomHeader/CustomHeader.jsx';
 
 function Shell() {
   return (

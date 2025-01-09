@@ -73,7 +73,6 @@ export function transformData(data) {
       targetPosition: 'left',
       position: { x: i * horizontalSpace, y: 0 },
       className: 'node-base node-standard',
-      selectable: false,
     });
   }
 

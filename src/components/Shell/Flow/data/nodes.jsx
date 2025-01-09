@@ -1,10 +1,5 @@
 const firstNodes = [
   {
-    id: 'c1',
-    data: { label: 'CICLO 1' },
-    ciclo: 1,
-  },
-  {
     id: 'INO101',
     data: { label: 'REDACCIÓN Y TÉCNICAS DE COMUNICACIÓN EFECTIVA I' },
     ciclo: 1,
@@ -39,11 +34,7 @@ const firstNodes = [
     data: { label: 'MEDIO AMBIENTE Y DESARROLLO SOSTENIBLE' },
     ciclo: 1,
   },
-  {
-    id: 'c2',
-    data: { label: 'CICLO 2' },
-    ciclo: 2,
-  },
+
   {
     id: 'INO201',
     data: { label: 'REDACCIÓN Y TÉCNICAS DE COMUNICACIÓN EFECTIVA II' },
@@ -79,11 +70,7 @@ const firstNodes = [
     data: { label: 'INTRODUCCIÓN A LAS CIENCIAS E INGENIERÍA' },
     ciclo: 2,
   },
-  {
-    id: 'c3',
-    data: { label: 'CICLO 3' },
-    ciclo: 3,
-  },
+
   {
     id: '202W0301',
     data: { label: 'ALGORÍTMICA I' },
@@ -119,11 +106,7 @@ const firstNodes = [
     data: { label: 'ORGANIZACIÓN Y ADMINISTRACIÓN' },
     ciclo: 3,
   },
-  {
-    id: 'c4',
-    data: { label: 'CICLO 4' },
-    ciclo: 4,
-  },
+
   {
     id: '202W0401',
     data: { label: 'ALGORÍTMICA II' },
@@ -159,11 +142,7 @@ const firstNodes = [
     data: { label: 'SISTEMAS DIGITALES' },
     ciclo: 4,
   },
-  {
-    id: 'c5',
-    data: { label: 'CICLO 5' },
-    ciclo: 5,
-  },
+
   {
     id: '202W0501',
     data: { label: 'ANÁLISIS Y DISEÑO DE ALGORITMOS' },
@@ -199,11 +178,7 @@ const firstNodes = [
     data: { label: 'INGENIERÍA DE REQUISITOS ' },
     ciclo: 5,
   },
-  {
-    id: 'c6',
-    data: { label: 'CICLO 6' },
-    ciclo: 6,
-  },
+
   {
     id: '202W0601',
     data: { label: 'ASEGURAMIENTO DE LA CALIDAD DEL SOFTWARE' },
@@ -239,11 +214,7 @@ const firstNodes = [
     data: { label: 'SISTEMAS OPERATIVOS ' },
     ciclo: 6,
   },
-  {
-    id: 'c7',
-    data: { label: 'CICLO 7' },
-    ciclo: 7,
-  },
+
   {
     id: '202W0701',
     data: { label: 'ARQUITECTURA DE SOFTWARE' },
@@ -279,11 +250,7 @@ const firstNodes = [
     data: { label: 'REDES Y TRANSMISIÓN DE DATOS' },
     ciclo: 7,
   },
-  {
-    id: 'c8',
-    data: { label: 'CICLO 8' },
-    ciclo: 8,
-  },
+
   {
     id: '202W0801',
     data: { label: 'AUTOMATIZACIÓN Y CONTROL DE SOFTWARE' },
@@ -324,11 +291,7 @@ const firstNodes = [
     data: { label: 'VERIFICACIÓN Y VALIDACIÓN DE SOFTWARE' },
     ciclo: 8,
   },
-  {
-    id: 'c9',
-    data: { label: 'CICLO 9' },
-    ciclo: 9,
-  },
+
   {
     id: '202W0901',
     data: { label: 'DESARROLLO DE TESIS I' },
@@ -369,11 +332,7 @@ const firstNodes = [
     data: { label: 'SOFTWARE INTELIGENTE' },
     ciclo: 9,
   },
-  {
-    id: 'c10',
-    data: { label: 'CICLO 10' },
-    ciclo: 10,
-  },
+
   {
     id: '202W1001',
     data: { label: 'ANALÍTICA DE DATOS' },
@@ -412,7 +371,7 @@ export let initialNodes = firstNodes.map((node) => ({
 }));
 
 let ciclo = 1;
-let cont = 0;
+let cont = 1;
 
 const horizontalSpace = 400;
 const verticalSpace = 150;
@@ -420,7 +379,7 @@ const verticalSpace = 150;
 initialNodes = initialNodes.map((node) => {
   if (ciclo !== node.ciclo) {
     ciclo = node.ciclo;
-    cont = 0;
+    cont = 1;
   }
 
   const xPos = ciclo * horizontalSpace;
@@ -436,5 +395,18 @@ initialNodes = initialNodes.map((node) => {
     className: 'node-base node-standard',
   };
 });
+
+for (let i = 1; i <= 10; i++) {
+  initialNodes.push({
+    id: `nodoCiclo${i}`,
+    data: { label: `CICLO ${i}` },
+    ciclo: i,
+    credito: 0,
+    sourcePosition: 'right',
+    targetPosition: 'left',
+    position: { x: i * horizontalSpace, y: 0 },
+    className: 'node-base node-standard',
+  });
+}
 
 // console.log(nodes);
