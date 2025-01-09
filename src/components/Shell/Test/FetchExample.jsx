@@ -10,6 +10,7 @@ const FetchAsignaturas = () => {
   const didFetch = useRef(false);
 
   const setNodes = useGlobalStore((state) => state.setNodes);
+  const setEdges = useGlobalStore((state) => state.setEdges);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +37,7 @@ const FetchAsignaturas = () => {
         console.log('edges:', edges);
 
         setNodes(nodes);
+        setEdges(edges);
 
         setData(result);
         setLoading(false);

@@ -29,12 +29,12 @@ export default function Aside() {
         <Text>No hay nodo seleccionado</Text>
       )}
 
-      <Title mt="md" order={3}>
+      {/* <Title mt="md" order={3}>
         Plan de Estudios
       </Title>
       <ScrollArea h={300}>
         <FetchAsignaturas />
-      </ScrollArea>
+      </ScrollArea> */}
     </Stack>
   );
 }

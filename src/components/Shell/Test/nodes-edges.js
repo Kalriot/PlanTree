@@ -3,30 +3,12 @@ export function transformData(data) {
   const nodeIds = [];
   const edges = [];
 
-  // let nSemester = null;
-
-  // let semesterNode = {};
   let courseNode = {};
   let courseEdge = {};
 
   data.forEach((course) => {
     // ignorar los cursos no obligatorios
     if (course.tipoAsignatura === 'E') return;
-
-    // // añadir nodo del semestre
-    // if (nSemester !== course.ciclo) {
-    //   nSemester = course.ciclo;
-
-    //   semesterNode = {
-    //     id: 'c' + nSemester,
-    //     text: 'CICLO ' + nSemester,
-    //     layoutOptions: {
-    //       'partitioning.partition': nSemester,
-    //     },
-    //   };
-
-    //   nodes.push(semesterNode);
-    // }
 
     // añadir los demas nodos de cursos
     const nodeExist = nodeIds.some((nodeId) => nodeId === course.codAsignatura);
@@ -95,5 +77,41 @@ export function transformData(data) {
     });
   }
 
-  return { nodes: positionedNodes, edges };
+  // Asignar colores y estilos a los edges
+  const colorNames = [
+    '#d51f68',
+    '#f96708',
+    '#fabd40',
+    '#2ddd6a',
+    '#6ad7d6',
+    '#2bb5f3',
+    '#ba29e0',
+  ];
+
+  const edgeColors = {};
+  let colorIndex = 0;
+
+  const styledEdges = edges.map((edge) => {
+    let color = edgeColors[edge.source];
+
+    if (!color) {
+      color = colorNames[colorIndex];
+      edgeColors[edge.source] = color;
+
+      if (colorIndex === colorNames.length - 1) {
+        colorIndex = 0;
+      } else {
+        colorIndex++;
+      }
+    }
+
+    return {
+      ...edge,
+      type: 'smart',
+      hidden: true,
+      style: { stroke: color, strokeWidth: 2 },
+    };
+  });
+
+  return { nodes: positionedNodes, edges: styledEdges };
 }
