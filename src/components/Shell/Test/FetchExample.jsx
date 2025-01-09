@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { transformData } from './nodes-edges';
 
+import { useGlobalStore } from '../../../store/useGlobalStore';
+
 const FetchAsignaturas = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const didFetch = useRef(false);
+
+  const setNodes = useGlobalStore((state) => state.setNodes);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +34,8 @@ const FetchAsignaturas = () => {
 
         console.log('nodes:', nodes);
         console.log('edges:', edges);
+
+        setNodes(nodes);
 
         setData(result);
         setLoading(false);

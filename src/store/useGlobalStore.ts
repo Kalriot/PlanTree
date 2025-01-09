@@ -18,6 +18,9 @@ interface GlobalStore {
   nodes: any[];
   edges: any[];
 
+  setNodes: (nodes: any[]) => void;
+  setEdges: (edges: any[]) => void;
+
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
 
@@ -41,6 +44,9 @@ interface GlobalStore {
 export const useGlobalStore = create<GlobalStore>()((set, get) => ({
   nodes: initialNodes,
   edges: initialEdges,
+
+  setNodes: (nodes: any[]) => set({ nodes }),
+  setEdges: (edges: any[]) => set({ edges }),
 
   onNodesChange: (changes: NodeChange[]) => {
     set({

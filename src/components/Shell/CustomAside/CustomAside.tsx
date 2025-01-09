@@ -21,7 +21,8 @@ export default function Aside() {
             <strong>Ciclo:</strong> {selectedNodeData.ciclo}
           </Text>
           <Text>
-            <strong>Creditos:</strong> #
+            <strong>Creditos:</strong>{' '}
+            {selectedNodeData.creditos ? selectedNodeData.creditos : '-'}
           </Text>
         </Stack>
       ) : (

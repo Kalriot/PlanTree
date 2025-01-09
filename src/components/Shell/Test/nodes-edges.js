@@ -36,6 +36,7 @@ export function transformData(data) {
         id: course.codAsignatura,
         data: { label: course.desAsignatura },
         ciclo: course.ciclo,
+        creditos: course.creditos,
       };
 
       nodes.push(courseNode);
@@ -85,10 +86,12 @@ export function transformData(data) {
       id: `nodoCiclo${i}`,
       data: { label: `CICLO ${i}` },
       ciclo: i,
+      credito: 0,
       sourcePosition: 'right',
       targetPosition: 'left',
       position: { x: i * horizontalSpace, y: 0 },
       className: 'node-base node-standard',
+      selectable: false,
     });
   }
 
