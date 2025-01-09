@@ -7,7 +7,7 @@ import './customFlow.css';
 
 import { SmartStraightEdge } from '@tisoap/react-flow-smart-edge';
 
-import { useGlobalStore } from '../../store/useGlobalStore';
+import { useGlobalStore } from '../../../store/useGlobalStore';
 import { useShallow } from 'zustand/react/shallow';
 
 const selector = (state) => ({

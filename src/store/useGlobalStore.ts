@@ -9,8 +9,8 @@ import {
   OnNodesChange,
 } from 'reactflow';
 
-import { initialNodes } from '../components/Flow/data/nodes';
-import { initialEdges } from '../components/Flow/data/edges';
+import { initialNodes } from '../components/Shell/Flow/data/nodes';
+import { initialEdges } from '../components/Shell/Flow/data/edges';
 
 import { bfs } from '../utils/flowUtils';
 

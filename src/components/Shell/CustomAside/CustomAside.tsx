@@ -1,5 +1,5 @@
 import { Stack, Title, Text } from '@mantine/core';
-import { useGlobalStore } from '../../store/useGlobalStore';
+import { useGlobalStore } from '../../../store/useGlobalStore';
 
 export default function Aside() {
   const selectedNodeData = useGlobalStore((state) => state.getNodeData());

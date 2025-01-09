@@ -1,47 +1,38 @@
-import {
-  AppShell,
-  Aside,
-  Footer,
-  Header,
-  MediaQuery,
-  Box,
-} from '@mantine/core';
+import { Box, Group, Loader } from '@mantine/core';
+import { useEffect, useState } from 'react';
 
-import Flow from '../Flow/Flow';
-import React from 'react';
+import Shell from '../Shell/Shell';
 
-import CustomAside from '../CustomAside/CustomAside';
-import CustomFooter from '../CustomFooter/CustomFooter';
-import CustomHeader from '../CustomHeader/CustomHeader';
+export default function Page() {
+  const [loading, setLoading] = useState(true);
 
-function Main() {
+  useEffect(() => {
+    // Simula la carga de datos o el estilo
+    const timer = setTimeout(() => {
+      setLoading(false); // Cambiar el estado a false cuando todo está listo
+    }, 2500); // Ajusta el tiempo de espera según sea necesario
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <AppShell
-      asideOffsetBreakpoint="sm"
-      aside={
-        <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 400, lg: 500 }}>
-            <CustomAside />
-          </Aside>
-        </MediaQuery>
-      }
-      footer={
-        <Footer height={60} p="md">
-          <CustomFooter />
-        </Footer>
-      }
-      header={
-        <Header height={{ base: 50, md: 70 }} p="md">
-          <CustomHeader />
-        </Header>
-      }
-    >
-      {/* // Contenido principal */}
-      <Box style={{ width: '100%', height: '100%' }}>
-        <Flow></Flow>
-      </Box>
-    </AppShell>
+    <>
+      {loading ? (
+        <Box
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
+        >
+          <Group>
+            <Loader />
+          </Group>
+        </Box>
+      ) : (
+        <Shell />
+      )}
+    </>
   );
 }
-
-export default Main;
