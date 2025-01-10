@@ -50,7 +50,7 @@ const Flow = () => {
   }, [selectedNode]);
 
   const handleNodeClick = useCallback((_, node) => {
-    console.log(node);
+    console.log('Node clicked:', node);
     setSelectedNode(node.id);
   }, []);
 
