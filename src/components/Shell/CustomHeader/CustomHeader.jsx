@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {
+  Box,
+  Avatar,
   Button,
   Container,
   Group,
@@ -18,8 +20,21 @@ import { TbSitemap, TbUsers } from 'react-icons/tb';
 import { useDisclosure } from '@mantine/hooks';
 
 import { fetchData } from '../../../utils/fetchData';
+import { useGlobalStore } from '../../../store/useGlobalStore';
 
 export default function CustomHeader() {
+  const user = useGlobalStore((state) => state.user);
+  const setUser = useGlobalStore((state) => state.setUser);
+
+  const handleLogout = () => {
+    setUser(null);
+  };
+
+  const getInitials = (username) => {
+    const [firstName, lastName] = username.split('.');
+    return `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
+  };
+
   return (
     <Group h="100%" px="md" style={{ justifyContent: 'space-between' }}>
       <Group spacing="xs">
@@ -29,7 +44,19 @@ export default function CustomHeader() {
         </Text>
       </Group>
       <Group>
-        <UserModal />
+        {user ? (
+          <Group>
+            <Avatar radius="xl">{getInitials(user)}</Avatar>
+            <Box>
+              <Text>{user}</Text>
+              <Button onClick={handleLogout} variant="outline">
+                Cerrar Sesión
+              </Button>
+            </Box>
+          </Group>
+        ) : (
+          <UserModal />
+        )}
       </Group>
     </Group>
   );
@@ -39,18 +66,22 @@ function UserModal() {
   const [opened, { open, close }] = useDisclosure(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
+
+  const setUser = useGlobalStore((state) => state.setUser);
 
   const handleLogin = async (user, pass) => {
     setLoading(true);
     setError(null);
-    setSuccess(false);
+    // setSuccess(false);
 
     const result = await fetchData(user, pass);
 
     setLoading(false);
     if (result.success) {
-      setSuccess(true);
+      setUser(user);
+      // setSuccess(true);
+      close();
     } else {
       setError(result.error);
     }
@@ -63,7 +94,7 @@ function UserModal() {
           onLogin={handleLogin}
           loading={loading}
           error={error}
-          success={success}
+          // success={success}
         />
       </Modal>
       <Button
@@ -78,7 +109,7 @@ function UserModal() {
 }
 
 // eslint-disable-next-line react/prop-types
-function UserModalContent({ onLogin, loading, error, success }) {
+function UserModalContent({ onLogin, loading, error }) {
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
 
@@ -121,11 +152,11 @@ function UserModalContent({ onLogin, loading, error, success }) {
             {error}
           </Alert>
         )}
-        {success && (
+        {/* {success && (
           <Alert color="green" mt="md">
             Inicio de sesión exitoso!
           </Alert>
-        )}
+        )} */}
       </Paper>
     </Container>
   );

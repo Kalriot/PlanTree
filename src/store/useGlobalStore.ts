@@ -15,6 +15,9 @@ import { initialEdges } from '../components/Shell/Flow/data/edges';
 import { bfs } from '../utils/flowUtils';
 
 interface GlobalStore {
+  user: string | null;
+  setUser: (user: string | null) => void;
+
   nodes: any[];
   edges: any[];
 
@@ -42,6 +45,9 @@ interface GlobalStore {
 }
 
 export const useGlobalStore = create<GlobalStore>()((set, get) => ({
+  user: null,
+  setUser: (user: string | null) => set({ user }),
+
   nodes: initialNodes,
   edges: initialEdges,
 
