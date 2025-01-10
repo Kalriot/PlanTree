@@ -100,8 +100,8 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
       newAdjListTarget[edge.target].push(edge.source);
     });
 
-    // console.log('newAdjListSource', newAdjListSource);
-    // console.log('newAdjListTarget', newAdjListTarget);
+    console.log('newAdjListSource', newAdjListSource);
+    console.log('newAdjListTarget', newAdjListTarget);
 
     set({
       adjListSource: newAdjListSource,
@@ -128,6 +128,9 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
         markedEdgesSource.push(node);
       });
     }
+
+    console.log('markedEdgesTarget', markedEdgesTarget);
+    console.log('markedEdgesSource', markedEdgesSource);
 
     updateEdges((eds) => {
       const newEdges = eds.map((edge) => {
