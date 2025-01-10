@@ -46,7 +46,10 @@ export const useGlobalStore = create<GlobalStore>()((set, get) => ({
   edges: initialEdges,
 
   setNodes: (nodes: any[]) => set({ nodes }),
-  setEdges: (edges: any[]) => set({ edges }),
+  setEdges: (edges: any[]) => {
+    set({ edges });
+    get().createAdjLists();
+  },
 
   onNodesChange: (changes: NodeChange[]) => {
     set({
