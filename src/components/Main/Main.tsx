@@ -2,6 +2,7 @@ import { Box, Group, Loader } from '@mantine/core';
 import { useEffect, useState } from 'react';
 
 import Shell from '../Shell/Shell';
+import { ReactFlowProvider } from 'reactflow';
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
@@ -31,7 +32,9 @@ export default function Page() {
           </Group>
         </Box>
       ) : (
-        <Shell />
+        <ReactFlowProvider>
+          <Shell />
+        </ReactFlowProvider>
       )}
     </>
   );

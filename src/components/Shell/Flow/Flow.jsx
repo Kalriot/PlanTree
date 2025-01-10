@@ -24,19 +24,18 @@ const edgeTypes = {
 const Flow = () => {
   const { nodes, edges, onEdgesChange } = useGlobalStore(useShallow(selector));
 
-  const { selectedNode, setSelectedNode, createAdjLists, markEdges } =
-    useGlobalStore((state) => ({
+  const { selectedNode, setSelectedNode, markEdges } = useGlobalStore(
+    (state) => ({
       selectedNode: state.selectedNode,
       setSelectedNode: state.setSelectedNode,
-
-      createAdjLists: state.createAdjLists,
       markEdges: state.markEdges,
-    }));
+    })
+  );
 
   // Creacion de adjLists
-  useEffect(() => {
-    createAdjLists();
-  }, []);
+  // useEffect(() => {
+  //   createAdjLists();
+  // }, []);
 
   useEffect(() => {
     fetch('/api/hello')

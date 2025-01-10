@@ -16,7 +16,7 @@ import {
   Alert,
 } from '@mantine/core';
 
-import { TbSitemap, TbUsers } from 'react-icons/tb';
+import { TbSitemap, TbUsers, TbLogout } from 'react-icons/tb';
 import { useDisclosure } from '@mantine/hooks';
 
 import { fetchData } from '../../../utils/fetchData';
@@ -26,11 +26,19 @@ export default function CustomHeader() {
   const user = useGlobalStore((state) => state.user);
   const setUser = useGlobalStore((state) => state.setUser);
 
+  const [
+    logoutModalOpened,
+    { open: openLogoutModal, close: closeLogoutModal },
+  ] = useDisclosure(false);
+
   const handleLogout = () => {
     setUser(null);
+    closeLogoutModal();
   };
 
   const getInitials = (username) => {
+    if (!username.includes('.')) return 'SM';
+
     const [firstName, lastName] = username.split('.');
     return `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
   };
@@ -46,18 +54,40 @@ export default function CustomHeader() {
       <Group>
         {user ? (
           <Group>
-            <Avatar radius="xl">{getInitials(user)}</Avatar>
+            <Avatar color="blue" radius="xl">
+              {getInitials(user)}
+            </Avatar>
             <Box>
               <Text>{user}</Text>
-              <Button onClick={handleLogout} variant="outline">
-                Cerrar Sesión
-              </Button>
             </Box>
+            <Button
+              onClick={openLogoutModal}
+              variant="outline"
+              rightIcon={<TbLogout size={20} />}
+            >
+              Cerrar Sesión
+            </Button>
           </Group>
         ) : (
           <UserModal />
         )}
       </Group>
+      <Modal
+        opened={logoutModalOpened}
+        onClose={closeLogoutModal}
+        centered
+        withCloseButton={false}
+      >
+        <Text>¿Está seguro de que desea cerrar sesión?</Text>
+        <Group position="right" mt="md">
+          <Button onClick={closeLogoutModal} variant="outline">
+            Cancelar
+          </Button>
+          <Button onClick={handleLogout} color="red">
+            Cerrar Sesión
+          </Button>
+        </Group>
+      </Modal>
     </Group>
   );
 }
@@ -75,6 +105,10 @@ function UserModal() {
     setError(null);
     // setSuccess(false);
 
+    if (user.includes('@')) {
+      user = user.split('@')[0];
+    }
+
     const result = await fetchData(user, pass);
 
     setLoading(false);
@@ -84,6 +118,7 @@ function UserModal() {
       close();
     } else {
       setError(result.error);
+      console.error('error', error);
     }
   };
 
@@ -149,7 +184,8 @@ function UserModalContent({ onLogin, loading, error }) {
         </form>
         {error && (
           <Alert color="red" mt="md">
-            {error}
+            {/* {error} */}
+            Por favor, verifique sus credenciales e intente nuevamente.
           </Alert>
         )}
         {/* {success && (
