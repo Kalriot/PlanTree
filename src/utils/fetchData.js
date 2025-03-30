@@ -6,7 +6,7 @@ export const fetchData = async (user, pass) => {
   const setEdges = useGlobalStore.getState().setEdges;
 
   try {
-    const response = await fetch('Cicilis.pythonanywhere.com/login', { // <-- CAMBIADO
+    const response = await fetch('https://cicilis.pythonanywhere.com/login', { // <-- CAMBIADO
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
