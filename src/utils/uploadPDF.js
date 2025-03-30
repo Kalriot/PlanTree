@@ -9,7 +9,7 @@ export const uploadPDF = async (file) => {
   formData.append('pdf', file);
 
   try {
-    const response = await fetch('http://localhost:5000/upload', {
+    const response = await fetch('Cicilis.pythonanywhere.com/upload', {
       method: 'POST',
       body: formData,
     });
