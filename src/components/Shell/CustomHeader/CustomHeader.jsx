@@ -21,7 +21,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { uploadPDF } from '../../../utils/uploadPDF';
 import { fetchData } from '../../../utils/fetchData';
 import { useGlobalStore } from '../../../store/useGlobalStore';
-import PropTypes from 'prop-types';
 
 export default function CustomHeader() {
   const user = useGlobalStore((state) => state.user);
