@@ -6,13 +6,14 @@ export const fetchData = async (user, pass) => {
   const setEdges = useGlobalStore.getState().setEdges;
 
   try {
-    const response = await fetch('/api/login', {
+    const response = await fetch('http://localhost:5000/login', { // <-- CAMBIADO
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ user, pass }),
     });
+    
 
     const result = await response.json();
     if (!response.ok) {
@@ -35,3 +36,4 @@ export const fetchData = async (user, pass) => {
     return { success: false, error: error.message };
   }
 };
+
