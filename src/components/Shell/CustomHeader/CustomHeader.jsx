@@ -134,7 +134,7 @@ export default function CustomHeader() {
             </Button>
           </Group>
         ) : (
-          <UserModal />
+          <UserModal setCarrera={setCarrera} />
         )}
       </Group>
 
@@ -149,7 +149,7 @@ export default function CustomHeader() {
   );
 } 
 // Login + Registro Modal (tipo slider)
-function UserModal() {
+function UserModal({ setCarrera }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [isRegister, setIsRegister] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -168,7 +168,9 @@ function UserModal() {
     setLoading(false);
 
     if (result.success) {
+      
       setUser(username);
+      setCarrera(result.carrera?.toUpperCase() || '');
       close();
     } else {
       setError(result.error);

@@ -8,7 +8,6 @@ export function transformData(data) {
 
   data.forEach((course) => {
     // ignorar los cursos no obligatorios
-    if (course.tipoAsignatura === 'E') return;
 
     // añadir los demas nodos de cursos
     const nodeExist = nodeIds.some((nodeId) => nodeId === course.codAsignatura);
