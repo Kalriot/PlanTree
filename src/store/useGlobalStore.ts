@@ -16,6 +16,9 @@ import { initialEdges } from '../components/Shell/Flow/data/edges';
 import { bfs } from '../utils/flowUtils';
 
 interface GlobalStore {
+  tokenArchivo: string | null;  
+  setTokenArchivo: (token: string | null) => void;
+
   user: string | null;
   setUser: (user: string | null) => void;
 
@@ -48,6 +51,9 @@ interface GlobalStore {
 export const useGlobalStore = create<GlobalStore>()(
   persist(
     (set, get) => ({
+      tokenArchivo: null,
+      setTokenArchivo: (token: string | null) => set({ tokenArchivo: token }),
+
       user: null,
       setUser: (user: string | null) => set({ user }),
 
