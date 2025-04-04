@@ -7,7 +7,7 @@ export const fetchData = async (user, pass) => {
   const setEdges = useGlobalStore.getState().setEdges;
   const setTokenArchivo = useGlobalStore.getState().setTokenArchivo; 
   try {
-    const response = await fetch('http://127.0.0.1:5000/login', { // <-- CAMBIADO
+    const response = await fetch('https://cicilis.pythonanywhere.com/login', { // <-- CAMBIADO
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export const saveCourseState = async (data) => {
 
 export const registerUser = async ({ user, correo, pass ,tokenArchivo }) => {
   try {
-    const response = await fetch('http://127.0.0.1:5000/register', {
+    const response = await fetch('https://cicilis.pythonanywhere.com/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
