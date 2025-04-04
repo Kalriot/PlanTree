@@ -2,12 +2,12 @@ import { useGlobalStore } from '../store/useGlobalStore';
 import { transformData } from './trasformData';
 
 export const fetchData = async (user, pass) => {
-  
+  const setNotasPorCurso = useGlobalStore.getState().setNotasPorCurso;  
   const setNodes = useGlobalStore.getState().setNodes;
   const setEdges = useGlobalStore.getState().setEdges;
   const setTokenArchivo = useGlobalStore.getState().setTokenArchivo; 
   try {
-    const response = await fetch('https://cicilis.pythonanywhere.com/login', { // <-- CAMBIADO
+    const response = await fetch('http://127.0.0.1:5000/login', { // <-- CAMBIADO
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const fetchData = async (user, pass) => {
     if (!response.ok) {
       throw new Error(result.error || 'Error al subir el logearse');
     }
-
+    setNotasPorCurso(result.notas); 
     const { nodes, edges } = transformData(result.cursos);
     setNodes(nodes);
     setEdges(edges);
@@ -38,7 +38,7 @@ export const fetchData = async (user, pass) => {
 };
 // utils/registerUser.js
 export const saveCourseState = async (data) => {
-  const response = await fetch('https://cicilis.pythonanywhere.com/guardar_estado', {
+  const response = await fetch('http://127.0.0.1:5000/guardar_estado', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export const saveCourseState = async (data) => {
 
 export const registerUser = async ({ user, correo, pass ,tokenArchivo }) => {
   try {
-    const response = await fetch('https://cicilis.pythonanywhere.com/register', {
+    const response = await fetch('http://127.0.0.1:5000/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

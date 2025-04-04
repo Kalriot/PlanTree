@@ -3,9 +3,9 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'CourseTree',
+  title: 'PlanTree',
   description:
-    'Visualiza tu Plan de Estudios de manera interactiva con CourseTree',
+    'Visualiza tu Plan de Estudios de manera interactiva con PlanTree',
 };
 
 const poppins = Poppins({

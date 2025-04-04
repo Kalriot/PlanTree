@@ -15,6 +15,20 @@ import { initialEdges } from '../components/Shell/Flow/data/edges';
 
 import { bfs } from '../utils/flowUtils';
 
+interface Parcial {
+  nota: number | '';
+  porcentaje: number | '';
+}
+
+interface NotaCurso {
+  estado: 'ninguno' | 'llevado' | 'en curso';
+  nota?: number;
+  parciales?: Parcial[];
+}
+
+interface NotasPorCurso {
+  [key: string]: NotaCurso;
+}
 interface GlobalStore {
   tokenArchivo: string | null;  
   setTokenArchivo: (token: string | null) => void;
@@ -42,9 +56,12 @@ interface GlobalStore {
 
   setAdjListSource: (adjListSource: { [key: string]: string[] }) => void;
   setAdjListTarget: (adjListTarget: { [key: string]: string[] }) => void;
+  
+  notasPorCurso: NotasPorCurso;
+  setNotasPorCurso: (notas: NotasPorCurso) => void;
 
   createAdjLists: () => void;
-
+  
   markEdges: () => void;
 }
 
@@ -53,7 +70,8 @@ export const useGlobalStore = create<GlobalStore>()(
     (set, get) => ({
       tokenArchivo: null,
       setTokenArchivo: (token: string | null) => set({ tokenArchivo: token }),
-
+      notasPorCurso: {} as NotasPorCurso,
+      setNotasPorCurso: (notas: NotasPorCurso) => set({ notasPorCurso: notas }),
       user: null,
       setUser: (user: string | null) => set({ user }),
 

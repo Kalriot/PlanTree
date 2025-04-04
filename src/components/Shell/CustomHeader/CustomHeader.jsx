@@ -50,32 +50,41 @@ export default function CustomHeader() {
 
   const handleSaveState = async () => {
     const tokenArchivo = useGlobalStore.getState().tokenArchivo;
-    
-    const user = useGlobalStore.getState().user;    
+    const user = useGlobalStore.getState().user;
+    const nodes = useGlobalStore.getState().nodes;
+  
     if (!user) {
-      alert('Debes iniciar sesión  para guardar información.');
+      alert('Debes iniciar sesión para guardar información.');
       return;
     }
     if (!tokenArchivo) {
-      alert('Debes subr un PDF para guardar información.');
+      alert('Debes subir un PDF para guardar información.');
       return;
     }
-
-    const notasPorCurso = localStorage.getItem("notasPorCurso");
-    console.log(tokenArchivo);
+  
+    const notasPorCurso = JSON.parse(localStorage.getItem("notasPorCurso") || '{}');
+  
+    const idsValidos = nodes.map(n => n.id);
+    const notasFiltradas = Object.fromEntries(
+      Object.entries(notasPorCurso).filter(
+        ([id]) => idsValidos.includes(id) 
+      )
+    );
+  
     const result = await saveCourseState({
       user,
       tokenArchivo,
-      notas: JSON.parse(notasPorCurso || '{}'),
+      notas: notasFiltradas,
     });
-
-
+  
     if (result.success) {
       alert('✅ Guardado exitoso');
     } else {
       alert('❌ No se pudo guardar: ' + result.error);
     }
   };
+  
+  
   const getInitials = (username) => {
     if (!username.includes('.')) return 'SM';
     const [firstName, lastName] = username.split('.');
@@ -87,7 +96,7 @@ export default function CustomHeader() {
       {/* Logo y título */}
       <Group spacing="xs">
         <TbSitemap size={36} />
-        <Text size="24px" fw={700}>CourseTree</Text>
+        <Text size="24px" fw={700}>PlanTree</Text>
       </Group>
 
       {/* Carrera extraída */}
@@ -159,6 +168,7 @@ function UserModal({ setCarrera }) {
   const [correo, setCorreo] = useState('');
   const [pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+
 
   const handleLogin = async () => {
     setLoading(true);
